@@ -1,3 +1,24 @@
+
+# Personal DWM config
+
+## Diffs from original dwm-6.2
+
+- MODKEY = windows button
+- Hide unused tags
+- Can open browser on any tag
+
+## Changed bindings
+
+- MOD|Shift	+ w - nmtui
+- MOD 	  	+ d - dmenu_run
+- MOD 		+ q - killclient
+- MOD 		+ e - lf
+- MOD|Shift	+ e - htop
+
+
+
+
+
 dwm - dynamic window manager
 ============================
 dwm is an extremely fast, small, and dynamic window manager for X.
