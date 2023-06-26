@@ -1,6 +1,18 @@
 
 # Personal DWM config
 
+## After installation
+
+### Enable touchpad
+Create a file on `/etc/X11/xorg.conf.d/30-touchpad.conf`
+```
+Section "InputClass"
+    Identifier "touchpado catchall"
+    Driver "libinput"
+    Option "Tapping" "on"
+EndSection
+```
+
 ## Diffs from original dwm-6.2
 
 - MODKEY = windows button
