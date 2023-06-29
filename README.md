@@ -13,10 +13,19 @@ Section "InputClass"
 EndSection
 ```
 
+### Enable xbacklight commands
+Create a file on `/etc/X11/xorg.conf.d/40-backlight.conf
+```
+Section "Device"
+    Identifier  "Intel Graphics" 
+    Driver      "intel"
+    Option      "Backlight"  "intel_backlight"
+EndSection
+```
+
 ## Diffs from original dwm-6.2
 
 - MODKEY = windows button
-- Hide unused tags
 - Can open browser on any tag
 
 ## Changed bindings
@@ -26,6 +35,11 @@ EndSection
 - MOD 		+ q - killclient
 - MOD 		+ e - lf
 - MOD|Shift	+ e - htop
+- MOD		+ p - slock
+- Brightness up	    - xbacklight -inc 5
+- Brightness down   - xbacklight -dec 5
+- Audio up	    - pactl set-sink-volume <> +5%
+- Audio down	    - pactl set-sink-volume <> -5%
 
 
 

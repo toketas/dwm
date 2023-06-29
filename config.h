@@ -1,11 +1,11 @@
 /* See LICENSE file for copyright and license details. */
-
+#include <X11/XF86keysym.h>
 
 /* Constants */
 #define TERMINAL "terminator"
 
 /* appearance */
-static unsigned int borderpx  = 3;        /* border pixel of windows */
+static unsigned int borderpx  = 2;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
 //static unsigned int gappih    = 20;
 //static unsigned int gappiv    = 10;
@@ -79,16 +79,21 @@ ResourcePref resources[] = {
     { "gappov", INTEGER, &gappov }
 }*/
 
+/* audio */
+static const char *upvol[]      = { "/usr/bin/pactl",   "set-sink-volume", "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp__sink",      "+5%",      NULL };
+static const char *downvol[]    = { "/usr/bin/pactl",   "set-sink-volume", "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp__sink",      "-5%",      NULL };
+static const char *mutevol[]    = { "/usr/bin/pactl",   "set-sink-mute",   "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp__sink",      "toggle",   NULL };
+
+/* backlight */
+static const char *brightnessup[] = { "/usr/bin/xbacklight", "-inc", "5", NULL };
+static const char *brightnessdown[] = { "/usr/bin/xbacklight", "-dec", "5", NULL };
 
 static Key keys[] = {
     /* modifier                     key        function        argument */
-    // { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
     { MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
     { MODKEY,                       XK_b,      togglebar,      {0} },
     { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
     { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-    //{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-    //{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
     { MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
     { MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
     { MODKEY,                       XK_Return, zoom,           {0} },
@@ -96,7 +101,6 @@ static Key keys[] = {
     { MODKEY,                       XK_q,      killclient,     {0} },
     { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
     { MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-    //{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
     { MODKEY,                       XK_space,  setlayout,      {0} },
     { MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
     { MODKEY,                       XK_0,      view,           {.ui = ~0 } },
@@ -120,10 +124,15 @@ static Key keys[] = {
     //{ MODKEY,                     XK_z,      incrgaps,       {.i = +3 } },
     //{ MODKEY,                     XK_x,      incrgaps,       {.i = -3 } },
     { MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD(TERMINAL " -e 'sudo nmtui'") },
-    { MODKEY,                       XK_e,      spawn,          SHCMD(TERMINAL " -e lf") },
     { MODKEY|ShiftMask,             XK_e,      spawn,          SHCMD(TERMINAL " -e 'htop'") },
     { MODKEY,                       XK_d,      spawn,          SHCMD("dmenu_run") },
+    { MODKEY,                       XK_p,      spawn,          SHCMD("slock") },
     { MODKEY,                       XK_Print,  spawn,          SHCMD("flameshot gui") },
+    { 0,                       	    XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
+    { 0,                            XF86XK_AudioMute, spawn, {.v = mutevol } },
+    { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
+    { 0,                            XF86XK_MonBrightnessUp, spawn, {.v = brightnessup} },
+    { 0,                            XF86XK_MonBrightnessDown, spawn, {.v = brightnessdown} },
     //{ MODKEY|ShiftMask,             XK_d,      spawn,          SHCMD("passmenu") },
 };
 
