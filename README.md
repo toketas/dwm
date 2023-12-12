@@ -1,6 +1,9 @@
 
 # Personal DWM config
 
+## Required software
+```sudo apt install build-essential libx11-dev libxft-dev libxinerama-dev libfreetype6-dev libfontconfig1-dev```
+
 ## After installation
 
 ### Enable touchpad
