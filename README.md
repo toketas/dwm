@@ -6,6 +6,17 @@
 
 ## After installation
 
+### Create a xsession for DWM
+`/usr/xsessions/dwm.desktop`
+```
+[Desktop Entry]
+Name=dwm
+Comment=dynamic window manager
+Exec=dwm
+Icon=dwm
+Type=Application
+```
+
 ### Enable touchpad
 Create a file on `/etc/X11/xorg.conf.d/30-touchpad.conf`
 ```
@@ -17,7 +28,7 @@ EndSection
 ```
 
 ### Enable xbacklight commands
-Create a file on `/etc/X11/xorg.conf.d/40-backlight.conf
+Create a file on `/etc/X11/xorg.conf.d/40-backlight.conf`
 ```
 Section "Device"
     Identifier  "Intel Graphics" 
